@@ -206,26 +206,26 @@ Suskaičiuokite kiek yra kiekvienos raidės.
 */
 echo '<br>3 uzdavinio sprendimas ---------------<br>';
 echo '<br>';
-// $masyvas= [];
-// $raides = ['A','B','C','D'];
-// $kiekiai =[0,0,0,0];
-// print_r($raides);
-// $index = 200;
-// $value = rand();
-// foreach (range(1,200) as $i) {
-//     $rand = rand(0, 3);
-//     $masyvas[$i]=$raides[$rand];
-//     $kiekiai[$rand]++;
-// }
-// echo '<pre>';        
-// print_r($masyvas);
-// print_r($raides);
-// print_r($kiekiai);
-// echo 'Masyve esanciu raidziu skaicius:';
-// echo '<br>';
-// foreach($raides as $key => $value){
-//     echo "$value:$kiekiai[$key]<br>";
-// }
+$masyvas= [];
+$raides = ['A','B','C','D'];
+$kiekiai =[0,0,0,0];
+print_r($raides);
+$index = 200;
+$value = rand();
+foreach (range(1,200) as $i) {
+    $rand = rand(0, 3);
+    $masyvas[]=$raides[$rand];
+    $kiekiai[$rand]++;
+}
+echo '<pre>';        
+print_r($masyvas);
+print_r($raides);
+print_r($kiekiai);
+echo 'Masyve esanciu raidziu skaicius:';
+echo '<br>';
+foreach($raides as $key => $value){
+    echo "$value:$kiekiai[$key]<br>";
+}
 
 $masyvas = [];
 $a=0;
@@ -269,8 +269,10 @@ sort($masyvas);
 print_r($masyvas);
 
 /*
-5. Sugeneruokite 3 masyvus pagal 3 uždavinio sąlygą. Sudėkite masyvus, sudėdami
- atitinkamas reikšmes. Paskaičiuokite kiek unikalių (po vieną, nesikartojančių)
+5. Sugeneruokite 3 masyvus pagal 3 uždavinio sąlygą.
+ Sudėkite masyvus, sudėdami
+ atitinkamas reikšmes. Paskaičiuokite kiek unikalių
+  (po vieną, nesikartojančių)
   reikšmių ir kiek unikalių kombinacijų gavote.
 */
 echo '<br>5 uzdavinio sprendimas ---------------<br>';
@@ -322,9 +324,11 @@ echo '<br>';
 echo "Unikaliu kombinaciju masyve yra: $uniqueComb";
 
 /*
-6. Sugeneruokite du masyvus, kurių reikšmės yra atsitiktiniai skaičiai nuo 100 
+6. Sugeneruokite du masyvus, kurių reikšmės yra 
+atsitiktiniai skaičiai nuo 100 
 iki 999.
- Masyvų ilgiai 100. Masyvų reikšmės turi būti unikalios savo masyve 
+ Masyvų ilgiai 100. Masyvų reikšmės turi būti
+  unikalios savo masyve 
  (t.y. neturi kartotis).
 
 */
@@ -334,18 +338,18 @@ echo '<br>';
 
 $array1 = [];
 $array2 = [];
-foreach(range(0,99) as $index){
+foreach(range(1,100) as $index){
     do {
         $value = rand(100, 999);
-    } while (array_search($value, $array1, true)!=false);
+    } while (array_search($value, $array1, true)!==false);
     $array1[]=$value;
 }
 echo '<br>';
 print_r($array1);
-foreach(range(0,99) as $index){
+foreach(range(1,100) as $index){
     do {
         $value = rand(100, 999);
-    } while (array_search($value, $array2, true)!=false);
+    } while (array_search($value, $array2, true)!==false);
     $array2[]=$value;
 }
 echo '<br>';
@@ -354,7 +358,8 @@ $array61 = $array1 ;
 $array62 = $array2  ;
 
 /*
-7. Sugeneruokite masyvą, kuris būtų sudarytas iš reikšmių, kurios yra pirmame 6 uždavinio 
+7. Sugeneruokite masyvą, kuris būtų sudarytas iš reikšmių,
+ kurios yra pirmame 6 uždavinio 
 masyve, bet nėra antrame 6 uždavinio masyve.
 */
 echo '<br>';
@@ -362,7 +367,7 @@ echo '<br>7 uzdavinio sprendimas ---------------<br>';
 echo '<br>';
 $arrayNew = [];
 foreach($array1 as $value){
-    if (array_search($value, $array2, true) == false) {
+    if (array_search($value, $array2, true) === false) {
          $arrayNew[]=$value;
     } 
 }
@@ -377,7 +382,7 @@ echo '<br>8uzdavinio sprendimas ---------------<br>';
 echo '<br>';
 $arrayNew1 = [];
 foreach($array1 as $value){
-    if (array_search($value, $array2, true) != false) {
+    if (array_search($value, $array2, true) !== false) {
          $arrayNew1[]=$value;
     } 
 }
@@ -399,8 +404,10 @@ $arrayCombined = array_combine($array62, $array61);
 print_r($arrayCombined);
 
 /*
-10. Sugeneruokite 10 skaičių masyvą pagal taisyklę: Du pirmi skaičiai- atsitiktiniai
- nuo 5 iki 25. Trečias, pirmo ir antro suma. Ketvirtas- antro ir trečio suma. 
+10. Sugeneruokite 10 skaičių masyvą pagal taisyklę: 
+Du pirmi skaičiai- atsitiktiniai
+ nuo 5 iki 25. Trečias, pirmo ir antro suma.
+  Ketvirtas- antro ir trečio suma. 
  Penktas trečio ir ketvirto suma ir t.t.
 */
 echo '<br>';
@@ -437,24 +444,119 @@ echo '<br>';
 echo '<br>11 uzdavinio sprendimas ---------------<br>';
 echo '<br>';
 
-$array11 = [];
-$value11 = rand(0, 300);
-foreach(range(1,101) as $index => $value11){
-    do {
-    $value11 = rand(0, 300);
-    } while (array_search($value11, $array11, true)==false);
-    $array11[] = $value11;
-}
-echo '<br>';
-print_r($array11);
-
-// foreach(range(0,99) as $index){
+// $array11 = [];
+// $value11 = rand(0, 300);
+// foreach(range(1,101) as $index => $value11){
 //     do {
-//         $value = rand(100, 999);
-//     } while (array_search($value, $array2, true)!=false);
-//     $array2[]=$value;
+//     $value11 = rand(0, 300);
+//     } while (array_search($value11, $array11, true)==false);
+//     $array11[] = $value11;
 // }
 // echo '<br>';
-// print_r($array2);
-// $array61 = $array1 ;
-// $array62 = $array2  ;
+// print_r($array11);
+
+// // foreach(range(0,99) as $index){
+// //     do {
+// //         $value = rand(100, 999);
+// //     } while (array_search($value, $array2, true)!=false);
+// //     $array2[]=$value;
+// // }
+// // echo '<br>';
+// // print_r($array2);
+// // $array61 = $array1 ;
+// // $array62 = $array2  ;
+
+echo '11. <br>';
+$array7 = [];
+$length = 0;
+do {
+    $unique = false;
+    do {
+        $random = rand(0, 300);
+        if (!array_search($random, $array1)) {
+            $array7[$length] = $random;
+            $unique = true;
+            $length++;
+        }
+    } while (!$unique);
+} while ($length < 101);
+rsort($array7);
+$biggest = $array7[0];
+// print_r($array7);
+unset($array7[0]);
+// print_r($array7);
+$sorted = false;
+    $array8 = [];
+    $array9 = [];
+do {
+    shuffle($array7);
+    $sorted = true;
+    $array8 = [];
+    $array9 = [];
+    $j = 0;
+    $sum1 = 0;
+    $sum2 = 0;
+    foreach($array7 as $value) {
+        if ($j % 2 === 0) {
+            $array8[] = $value;
+            $sum1 += $value;
+        } else {
+            $array9[] = $value;
+            $sum2 += $value;
+        }
+        $j++;
+    }
+    $diff = ($sum1 > $sum2) ? $sum1 - $sum2 : $sum2 - $sum1;
+    //echo "$diff  ";
+    if ($diff > 30) {
+        $sorted = false;
+        shuffle($array7);
+    }
+} while (!$sorted);
+sort($array8);
+rsort($array9);
+$array8[] = $biggest;
+foreach ($array9 as $value) {
+    $array8[] = $value;
+}
+print_r($array8);
+
+$pirmaPuse=0;
+$antraPuse=0;
+$pirminisMasyvas=[];
+$counter=0;
+//generuoja skaiciu masyva
+do{
+$random=rand(0,300);
+    if(!in_array($random,$pirminisMasyvas)){
+    $pirminisMasyvas[]=$random;
+    $counter++;}
+}
+while($counter<101);
+//suranda didziausia skaiciu reiksme issaugo ir istrina is masyvo
+$didziausiasSkaicius=max($pirminisMasyvas);
+$indexOfMax=(array_search(max($pirminisMasyvas), $pirminisMasyvas));
+unset($pirminisMasyvas[$indexOfMax]);
+//tikrina ar masyvo skaiciai iki vidurinio is abieu pusiu nesiskiria per 30 , jai skirias sumaiso masyva. 
+do{
+    shuffle($pirminisMasyvas);
+foreach ($pirminisMasyvas as $key => $value) {
+    if($key<50){
+        $pirmaPuse+=$value;
+    }
+    else{
+        $antraPuse+=$value;
+    }
+}
+}
+while($pirmaPuse-$antraPuse>30);
+//dalinam masyva
+$masyvasPoPadalinimo=array_chunk($pirminisMasyvas,50);
+
+sort($masyvasPoPadalinimo[0]);
+rsort($masyvasPoPadalinimo[1]);
+//jungiam masyva
+array_push($masyvasPoPadalinimo[0],$didziausiasSkaicius);
+$sujungtasMasyvas=array_merge($masyvasPoPadalinimo[0],$masyvasPoPadalinimo[1]);
+
+print_r( $sujungtasMasyvas);
