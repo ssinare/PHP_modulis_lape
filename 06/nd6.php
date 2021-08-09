@@ -1,3 +1,4 @@
+
 <?php
 /*
 4 - usort custom f-ja
@@ -149,6 +150,8 @@ foreach($masyvas3 as $parentIndex => $vaikas) {
 }
 print_r($masyvas3);
 
+//usort($masyvas3, function($a, $b){return count($a)<=> count($b)});
+
 $keiciamasMasyvas = [];
     for ($i=10; $i>0; $i--) {
         if (array_search('K', $masyvas3[$i], true) !== false) {
@@ -223,6 +226,13 @@ echo "<br> Isrusiuota pagal place_in_row mazejancia tvarka:";
 echo '<br>';
 print_r($masyvas);
 echo '<br>';
+
+// shuffle($array);
+// sort($array);
+// usort($array, function($a, $b)) {
+//     return $b['user_id'] <=> $a['user_id'];
+// }
+
 
 /*
 7.	Prie 6 uždavinio masyvo antro lygio masyvų pridėkite dar du elementus:

@@ -8,25 +8,62 @@ Examples:
 countBy(1,10) // should return [1,2,3,4,5,6,7,8,9,10]
 countBy(2,5) // should return [2,4,6,8,10]/*
 */
-
-
-
-
-
 //function countBy($x, $n) {
-    $z = array();
-    $n = 25;
-    $y= 1;
-for ($i = 0; $i < $n; $i++) {
-  $y = $x*($i+1);
-  $z = array_push($z, $y);
+    $n = 5;
+    $z = [];
+    $x = 2;
+foreach(range(1, $n) as $i) {
+      $z[] = $x*$i;
   }
-  array_push($z, $y);
-  echo "The number is: $z <br>";
-
-    return $z;
     print_r($z);
-//}
 
 
-?>
+/*
+https://www.codewars.com/kata/57eae20f5500ad98e50002c5/train/php
+Simple, remove the spaces from the string, then return the resultant string.
+*/
+echo '<br>';
+echo '<br>. 2 uzdavinio sprendimas ---------------<br>';
+echo '<br>';
+$string = '';
+$s = 'hgffffd mnb gg tt bfdds iiy';
+function no_space(string $s): string {
+  return preg_replace("/\s*/", '', $s); 
+ // $s = str_replace(" ", "", $s);
+//echo trim($s," ");
+}
+echo no_space($s);
+
+echo '<br>';
+echo '<br>. 3 uzdavinio sprendimas ---------------<br>';
+echo '<br>';
+echo '<pre>';
+
+function fake_bin(string $s): string {
+  $pieces = str_split($s);
+  print_r($pieces);
+  foreach($pieces as $i => $value) {
+    if ($pieces[$i]<5) {
+      $pieces[$i] =0;
+    }
+    elseif($pieces[$i]>=5) {
+      $pieces[$i] =1;
+    }
+  }
+  print_r($pieces) ;
+  return implode('', $pieces);
+}
+echo fake_bin('156873429');
+
+
+function fake_bin(string $s): string {
+  return preg_replace(array('/[0-4]/', '/[5-9]/'), array('0', '1'), $s);
+}
+
+function fake_bin(string $s): string {
+  return preg_replace(['/[1-4]/','/[5-9]/'], [0,1], $s);
+}
+
+function fake_bin(string $s): string {
+  return strtr($s, '123456789', '000011111'); 
+}
