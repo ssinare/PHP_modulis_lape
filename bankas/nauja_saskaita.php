@@ -1,36 +1,16 @@
 <?php
-function getSaskaita(): array
-{
-    if (!file_exists(__DIR__ . '/nauja_saskaita.json')) { //kai failo nera
-        $saskaitos = [];
-        $saskaita = ['Vardas' => '', 'Pavardė' => '', 'Sąskaita' => 0, 'Asmens_kodas' => 0];
 
-        $saskaita = json_encode($saskaita);
-        file_put_contents(__DIR__ . '/nauja_saskaita.json', $saskaita); //nusiskaitom bebrus. DIR YRA serveris, NE url
-    }
-    return json_decode(file_get_contents(__DIR__ . '/nauja_saskaita.json'), 1); //kai failas yra ir visada(get contents). kai decode dekoduoja, ji pavercia i objekta. reikia antra argumenta padaryti true, kad nebutu objektas, todel raom 1
-}
-function setSaskaita(array $saskaita): void
-{
-    $esamosSaskaitos = getSaskaita();
-    array_push($esamosSaskaitos, $saskaita);
-    $naujosSaskaita = json_encode($esamosSaskaitos);
-    file_put_contents(__DIR__ . '/nauja_saskaita.json', $naujosSaskaita);
-}
+require __DIR__ . '/functions.php';
 
-//setSaskaita(['Vardas' => 'Petras', 'Pavardė' => 'Petraitis', 'Sąskaita' => 'LT00123456789', 'Asmens_kodas' => 38905050397]); //json faile atsiranda, galima istirinti, arba setiname loocalhoste
-$saskaitos = getSaskaita();
-
-
+$saskaitos = getSaskaitos();
 
 if ('POST' == $_SERVER['REQUEST_METHOD']) {
-    $saskaita = getSaskaita();
 
-    $saskaita['Vardas'] = (string)$_POST['Vardas'];
+    $saskaita['Vardas'] = (string)$_POST['Vardas']; //router visus situs
     $saskaita['Pavardė'] = (string)$_POST['Pavardė'];
     $saskaita['Sąskaita'] = (string)$_POST['Sąskaita'];
     $saskaita['Asmens_kodas'] = (string)$_POST['Asmens_kodas'];
-
+    $saskaita['Likutis'] = (int)$_POST['Likutis'];
 
     setSaskaita($saskaita);
 
@@ -40,10 +20,7 @@ if ('POST' == $_SERVER['REQUEST_METHOD']) {
 
 if ('GET' == $_SERVER['REQUEST_METHOD']) :
 
-
 ?>
-
-
 <!DOCTYPE html>
 <html lang="en">
 
@@ -64,21 +41,33 @@ h4 {
     text-decoration: none;
     text-align: justify;
 }
+
+a {
+    display: inline-block;
+    color: grey;
+    background-color: lightgray;
+    margin: 5px;
+    padding: 5px;
+    border: 1px solid #ccc;
+    width: 200px;
+    text-decoration: none;
+    text-align: center;
+}
 </style>
 
 <body>
-    <h4>Pridėti vardą: <?= $saskaitos[count($saskaitos) - 1]['Vardas'] ?></h4>
-    <h4>Pridėti pavardę: <?= $saskaitos[count($saskaitos) - 1]['Pavardė'] ?></h4>
-    <h4>Pridėti sąskaitos numerį: <?= $saskaitos[count($saskaitos) - 1]['Sąskaita'] ?></h4>
-    <h4>Pridėti asmens kodą: <?= $saskaitos[count($saskaitos) - 1]['Asmens_kodas'] ?></h4>
+    <h4>
+        <a href="http://localhost/Lape/bankas/meniu.php">Meniu</a>
+    </h4>
+
     <form action="" method="POST">
 
         <div>
-            <label>Vardas: </label><input type="text" name="Vardas" placeholder="Įveskite kliento vardą" required>
+            <label>Vardas: </label><input type="text" name="Vardas" placeholder="Įveskite kliento vardą" required pattern="[a-zA-Z]{3,}">
         </div>
 
         <div>
-            <label>Pavardė: </label><input type="text" name="Pavardė" placeholder="Įveskite pavardę" required>
+            <label>Pavardė: </label><input type="text" name="Pavardė" placeholder="Įveskite pavardę" required pattern="[a-zA-Z]{3,}">
         </div>
 
         <div>
@@ -88,6 +77,10 @@ h4 {
         <div>
             <label>Asmens kodas: </label><input type="text" name="Asmens_kodas" placeholder="Įveskite asmens kodą" required pattern="[3-6][0-9]{10}">
         </div>
+        <div>
+            <label>Likutis: </label><input type="text" name="Likutis" value=0 placeholder="Suma" required>
+        </div>
+
         <div>
             <button type="submit" name="Ivesti" value="Suvesti duomenys">Išsaugoti duomenis</button>
         </div>

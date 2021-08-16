@@ -39,10 +39,9 @@ label {
 
 <body>
     <h5>
-        <a href="http://localhost/Lape/bankas/saskaitu_sarasas.php">Sąskaitų sarašas</a>
         <a href="http://localhost/Lape/bankas/nauja_saskaita.php">Nauja sąskaita</a>
-        <a href="http://localhost/Lape/bankas/nuskaiciuoti_lesas.php">Nuskaičiuoti lėšas</a>
-        <a href="http://localhost/Lape/bankas/prideti_lesas.php">Pridėti lėšas</a>
+        <a href="http://localhost/Lape/bankas/saskaitu_sarasas.php">Sąskaitų sarašas</a>
+        <a href="http://localhost/Lape/bankas/login.php">Prisijungti</a>
     </h5>
 
 

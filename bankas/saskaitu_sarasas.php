@@ -1,18 +1,44 @@
 <?php
 
-function getSaskaitos(): array
-{
-    if (!file_exists(__DIR__ . '/nauja_saskaita.json')) {
-        $saskaita = ['Vardas' => '', 'Pavardė' => '', 'Sąskaita' => 0, 'Asmens_kodas' => 0];
+//$actual_link = "http://$_SERVER[HTTP_HOST]$_SERVER[REQUEST_URI]";
 
-        $saskaita = json_encode($saskaita);
-        file_put_contents(__DIR__ . '/nauja_saskaita.json', $saskaita);
+require __DIR__ . '/functions.php';
+
+
+if ('POST' == $_SERVER['REQUEST_METHOD']) :
+
+    $trinamaSaskaita =  $_POST['Trinti'];
+    $istrinta = istrintiSaskaita($trinamaSaskaita);
+    if ($istrinta == true) {
+        header('Location: http://localhost/Lape/bankas/saskaitu_sarasas.php?istrinta=taip&istrintaSaskaita=' . $trinamaSaskaita);
+        //header('Location: ' . $actual_link . '?istrintaSaskaita=' . $trinamaSaskaita);
+        die;
+    } elseif ($istrinta == false) {
+        header('Location: http://localhost/Lape/bankas/saskaitu_sarasas.php?istrinta=ne&istrintaSaskaita=' . $trinamaSaskaita);
+        die;
+    } else {
+        header('Location: http://localhost/Lape/bankas/saskaitu_sarasas.php');
+        die;
     }
-    return json_decode(file_get_contents(__DIR__ . '/nauja_saskaita.json'), 1);
-}
+
+endif;
+
+
+
+
+
 if ('GET' == $_SERVER['REQUEST_METHOD']) :
 
     $saskaituSarasas = getSaskaitos();
+    $zinute = '';
+    if (isset($_GET['suma'])) {
+        if ($_GET['suma'] < 0) {
+            $zinute = 'Nuo sąskaitos nr: ' . $_GET['saskaitosNumeris'] . ' buvo nuskaičiuota ' . -$_GET['suma'];
+        } elseif ($_GET['suma'] > 0) {
+            $zinute = 'Prie sąskaitos nr: ' . $_GET['saskaitosNumeris'] . ' buvo pridėta ' . $_GET['suma'];
+        }
+    }
+
 
 ?>
 
@@ -32,31 +58,80 @@ div {
     margin: 5px;
     padding: 5px;
     border: 1px solid #ccc;
-    width: 350px;
+    width: 400px;
     text-decoration: none;
     text-align: justify;
 }
 
 a {
-    width: 250px;
+    display: inline-block;
+    color: grey;
+    background-color: lightgray;
+    margin: 5px;
+    padding: 5px;
+    border: 1px solid #ccc;
+    width: 200px;
+    text-decoration: none;
+    text-align: center;
 }
 </style>
 
 <body>
+    <h4>
+        <a href="http://localhost/Lape/bankas/meniu.php">Meniu</a>
+    </h4>
+    <?php
+        if ($zinute != '') {
+        ?>
+    <div>
+        <?= $zinute ?>
+    </div>
+    <?php
+
+        }
+        if (isset($_GET['istrinta'])) {
+            if ($_GET['istrinta'] == 'ne') {
+            ?>
+    <div>
+        Yra lėšų. Negalima ištrinti sąskaitos nr: <?= $_GET['istrintaSaskaita'] ?>
+    </div>
+    <?php
+            } elseif ($_GET['istrinta'] == 'taip') {
+            ?>
+    <div>
+        Buvo ištrinta sąskaita nr: <?= $_GET['istrintaSaskaita'] ?>
+    </div>
+    <?php
+            }
+        }
+        if (count($saskaituSarasas) != 0) {
+            ?>
     <form action="" method="post">
         <?php
-            foreach ($saskaituSarasas as $saskaita) {
-            ?> <div>
-            <label><?= $saskaita['Vardas'] . ' ' . $saskaita['Pavardė'] . ' ' . $saskaita['Sąskaita'] ?> </label>
-            <input type="submit" name="Trinti" value="Trinti" id="<?= $saskaita['Sąskaita'] ?>">
+                foreach ($saskaituSarasas as $saskaita) {
+                ?>
+        <div>
+            <label><?= $saskaita['Vardas'] . ' ' . $saskaita['Pavardė'] . ' ' . $saskaita['Sąskaita'] . ' ' . $saskaita['Likutis'] ?> </label>
+            <button type="submit" name="Trinti" value="<?= $saskaita['Sąskaita'] ?>">Trinti</button>
             <a href="./prideti_lesas.php?saskaita=<?= $saskaita['Sąskaita'] ?>">Pridėti lėšų</a>
             <a href="./nuskaiciuoti_lesas.php?saskaita=<?= $saskaita['Sąskaita'] ?>">Nuskaičiuoti lėšas</a>
         </div>
         <?php
-            }
-            ?>
-
+                }
+                ?>
     </form>
+    <?php
+        } else {
+            echo 'Nėra sukurta sąskaitų';
+        ?>
+    <h4>
+        <a href="http://localhost/Lape/bankas/nauja_saskaita.php">Sukurti naują sąskaitą</a>
+    </h4>
+    <?php
+        }
+        ?>
+
+
 
 </body>
 
