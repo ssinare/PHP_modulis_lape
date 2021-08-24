@@ -1,7 +1,7 @@
 <?php
 
 //$actual_link = "http://$_SERVER[HTTP_HOST]$_SERVER[REQUEST_URI]";
-
+require __DIR__ . '/virsus.php';
 require __DIR__ . '/functions.php';
 
 
@@ -10,23 +10,19 @@ if ('POST' == $_SERVER['REQUEST_METHOD']) :
     $trinamaSaskaita =  $_POST['Trinti'];
     $istrinta = istrintiSaskaita($trinamaSaskaita);
     if ($istrinta == true) {
-        header('Location: http://localhost/Lape/bankas/saskaitu_sarasas.php?istrinta=taip&istrintaSaskaita=' . $trinamaSaskaita);
+        header('Location: http://localhost/Lape/bankas/bankas_ver1/saskaitu_sarasas.php?istrinta=taip&istrintaSaskaita=' . $trinamaSaskaita);
         //header('Location: ' . $actual_link . '?istrintaSaskaita=' . $trinamaSaskaita);
-        die;
     } elseif ($istrinta == false) {
-        header('Location: http://localhost/Lape/bankas/saskaitu_sarasas.php?istrinta=ne&istrintaSaskaita=' . $trinamaSaskaita);
+        header('Location: http://localhost/Lape/bankas/bankas_ver1/saskaitu_sarasas.php?istrinta=ne&istrintaSaskaita=' . $trinamaSaskaita);
         die;
     } else {
-        header('Location: http://localhost/Lape/bankas/saskaitu_sarasas.php');
+        header('Location: http://localhost/Lape/bankas/bankas_ver1/saskaitu_sarasas.php');
         die;
     }
 
+
 endif;
-
-
-
-
-
+//alertai
 if ('GET' == $_SERVER['REQUEST_METHOD']) :
 
     $saskaituSarasas = getSaskaitos();
@@ -38,12 +34,10 @@ if ('GET' == $_SERVER['REQUEST_METHOD']) :
             $zinute = 'Prie sąskaitos nr: ' . $_GET['saskaitosNumeris'] . ' buvo pridėta ' . $_GET['suma'];
         }
     }
-
-
 ?>
 
 
-<!DOCTYPE html>
+<!-- <!DOCTYPE html>
 <html lang="en">
 
 <head>
@@ -74,11 +68,11 @@ a {
     text-decoration: none;
     text-align: center;
 }
-</style>
+</style> -->
 
 <body>
     <h4>
-        <a href="http://localhost/Lape/bankas/meniu.php">Meniu</a>
+        <a href="http://localhost/Lape/bankas/bankas_ver1/meniu.php">Meniu</a>
     </h4>
     <?php
         if ($zinute != '') {
@@ -125,7 +119,7 @@ a {
             echo 'Nėra sukurta sąskaitų';
         ?>
     <h4>
-        <a href="http://localhost/Lape/bankas/nauja_saskaita.php">Sukurti naują sąskaitą</a>
+        <a href="http://localhost/Lape/bankas/bankas_ver1/nauja_saskaita.php">Sukurti naują sąskaitą</a>
     </h4>
     <?php
         }

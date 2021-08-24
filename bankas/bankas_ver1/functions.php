@@ -30,27 +30,33 @@ function setSaskaita(array $naujaSaskaita): void
     file_put_contents(__DIR__ . '/nauja_saskaita.json', $esamosSaskaitos);
 }
 
-function router()
-{
-    $route = $_GET['route'] ?? '';
-}
-if ('GET' == $_SERVER['REQUEST_METHOD'] && '' === $route) {
-        pirmasPuslapis();
-    }
-    elseif ('POST' == $_SERVER['REQUEST_METHOD'] && 'prideti-juodus' == $route) {
-        pridetiJuodus();
-    }
-    elseif ('POST' == $_SERVER['REQUEST_METHOD'] && 'atimti-juodus' == $route) {
-        atimtiJuodus();
-    }
-    elseif ('POST' == $_SERVER['REQUEST_METHOD'] && 'prideti-rudus' == $route) {
-        pridetiRudus();
-    }
-    elseif ('POST' == $_SERVER['REQUEST_METHOD'] && 'atimti-rudus' == $route) {
-        atimtiRudus();
-    }
-    else {
-        echo 'Page not found 404';
-        die;
-    }
-}
+// function router()
+// {
+//     $route = $_GET['route'] ?? '';
+
+//     if ('GET' == $_SERVER['REQUEST_METHOD'] && '' === $route) {
+//         pirmasPuslapis();
+//     }
+//     elseif ('POST' == $_SERVER['REQUEST_METHOD'] && 'saskaitu-sarasas' == $route) {
+//         pridetiJuodus();
+//     }
+//     elseif ('POST' == $_SERVER['REQUEST_METHOD'] && 'atimti-juodus' == $route) {
+//         atimtiJuodus();
+//     }
+//     elseif ('POST' == $_SERVER['REQUEST_METHOD'] && 'prideti-rudus' == $route) {
+//         pridetiRudus();
+//     }
+//     elseif ('POST' == $_SERVER['REQUEST_METHOD'] && 'atimti-rudus' == $route) {
+//         atimtiRudus();
+//     }
+//     else {
+//         echo 'Page not found 404';
+//         die;
+//     }
+// }
+
+
+// function pirmasPuslapis()
+// {
+//     require __DIR__ . '/virsus.php';
+// }

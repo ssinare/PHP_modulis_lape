@@ -1,5 +1,6 @@
 <?php
 require __DIR__ . '/functions.php';
+require __DIR__ . '/virsus.php';
 
 function atimtiLesas(string $saskNumeris, int $suma): int
 {
@@ -7,7 +8,7 @@ function atimtiLesas(string $saskNumeris, int $suma): int
     if ($suma <= $esamosSaskaitos[$saskNumeris]['Likutis']) {
         $nuskaiciuota = $suma;
         $esamosSaskaitos[$saskNumeris]['Likutis'] -= $suma;
-    } else {
+    } elseif ($suma > $esamosSaskaitos[$saskNumeris]['Likutis']) {
         $nuskaiciuota = $esamosSaskaitos[$saskNumeris]['Likutis'];
         $esamosSaskaitos[$saskNumeris]['Likutis'] = 0;
     }
@@ -28,13 +29,13 @@ if ('POST' == $_SERVER['REQUEST_METHOD']) {
     $suma = $_POST['Suma'];
     $nuskaiciuota = atimtiLesas($saskaitosNr, $suma);
 
-    header('Location: http://localhost/Lape/bankas/saskaitu_sarasas.php?suma=-' . $nuskaiciuota . '&saskaitosNumeris=' . $saskaitosNr);
+    header('Location: http://localhost/Lape/bankas/bankas_ver1/saskaitu_sarasas.php?suma=-' . $nuskaiciuota . '&saskaitosNumeris=' . $saskaitosNr);
     die;
 }
 if ('GET' == $_SERVER['REQUEST_METHOD']) :
     $saskaitosNr = $_GET['saskaita'];
 ?>
-<!DOCTYPE html>
+<!-- <!DOCTYPE html>
 <html lang="en">
 
 <head>
@@ -53,7 +54,7 @@ div {
     text-decoration: none;
     text-align: justify;
 }
-</style>
+</style> -->
 
 <body>
     <h2>Nuskaičiuoti lėšas iš sąskaitos nr: <?= $saskaitosNr ?></h2>

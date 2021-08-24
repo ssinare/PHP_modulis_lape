@@ -1,5 +1,5 @@
 <?php
-
+require __DIR__ . '/virsus.php';
 require __DIR__ . '/functions.php';
 
 $saskaitos = getSaskaitos();
@@ -14,50 +14,17 @@ if ('POST' == $_SERVER['REQUEST_METHOD']) {
 
     setSaskaita($saskaita);
 
-    header('Location: http://localhost/Lape/bankas/saskaitu_sarasas.php');
+    header('Location: http://localhost/Lape/bankas/bankas_ver1/saskaitu_sarasas.php');
     die;
 }
 
 if ('GET' == $_SERVER['REQUEST_METHOD']) :
 
 ?>
-<!DOCTYPE html>
-<html lang="en">
-
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Nauja sąskaita</title>
-</head>
-<style>
-div,
-h4 {
-    display: inline-block;
-    margin: 5px;
-    padding: 5px;
-    border: 1px solid #ccc;
-    width: 430px;
-    text-decoration: none;
-    text-align: justify;
-}
-
-a {
-    display: inline-block;
-    color: grey;
-    background-color: lightgray;
-    margin: 5px;
-    padding: 5px;
-    border: 1px solid #ccc;
-    width: 200px;
-    text-decoration: none;
-    text-align: center;
-}
-</style>
 
 <body>
     <h4>
-        <a href="http://localhost/Lape/bankas/meniu.php">Meniu</a>
+        <a href="http://localhost/Lape/bankas/bankas_ver1/meniu.php">Meniu</a>
     </h4>
 
     <form action="" method="POST">

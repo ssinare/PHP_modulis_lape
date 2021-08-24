@@ -1,5 +1,7 @@
 <?php
+require __DIR__ . '/virsus.php';
 require __DIR__ . '/functions.php';
+
 
 function pridetiLesu(string $saskNumeris, int $suma): int
 {
@@ -22,13 +24,13 @@ if ('POST' == $_SERVER['REQUEST_METHOD']) {
     $suma = $_POST['Suma'];
     $suma = pridetiLesu($saskaitosNr, $suma);
 
-    header('Location: http://localhost/Lape/bankas/saskaitu_sarasas.php?suma=' . $suma . '&saskaitosNumeris=' . $saskaitosNr);
+    header('Location: http://localhost/Lape/bankas/bankas_ver1/saskaitu_sarasas.php?suma=' . $suma . '&saskaitosNumeris=' . $saskaitosNr);
     die;
 }
 if ('GET' == $_SERVER['REQUEST_METHOD']) :
     $saskaitosNr = $_GET['saskaita'];
 ?>
-<!DOCTYPE html>
+<!-- <!DOCTYPE html>
 <html lang="en">
 
 <head>
@@ -47,7 +49,7 @@ div {
     text-decoration: none;
     text-align: justify;
 }
-</style>
+</style> -->
 
 <body>
     <form action="" method="post">

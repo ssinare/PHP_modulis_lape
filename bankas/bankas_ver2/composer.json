@@ -1,5 +1,14 @@
 {
-    "require": {
-        "ramsey/uuid": "^4.2"
+  "name": "ssina/bankas_ver2",
+  "description": "Banko s\u0000skait\u0000 valdymo sistema",
+  "type": "no",
+  "license": "MIT",
+  "require": {},
+  "autoload": {
+    "psr-4": {
+      "Bankas\\Saskaita\\": "app/",
+      "Bankas\\Saskaita\\Controllers\\": "app/controllers/",
+      "App\\DB\\": "app/"
     }
+  }
 }
